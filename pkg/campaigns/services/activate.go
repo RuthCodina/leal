@@ -8,8 +8,8 @@ import (
 	"github.com/leal/pkg/campaigns/domain"
 )
 
-func (s *CampaignService) Activate(ctx context.Context, name string, id int) error {
-	err := s.campaignRepository.Activate(ctx, name, id)
+func (s *Service) Activate(ctx context.Context, name string, id int) error {
+	err := s.Repository.Activate(ctx, name, id)
 	if err != nil {
 		if errors.Is(err, domain.ErrTimeout) {
 			log.Println("time_out_error")
@@ -24,8 +24,8 @@ func (s *CampaignService) Activate(ctx context.Context, name string, id int) err
 	}
 	return nil
 }
-func (s *CampaignService) Inactivate(ctx context.Context, name string, id int) error {
-	err := s.campaignRepository.Inactivate(ctx, name, id)
+func (s *Service) Inactivate(ctx context.Context, name string, id int) error {
+	err := s.Repository.Inactivate(ctx, name, id)
 	if err != nil {
 		if errors.Is(err, domain.ErrTimeout) {
 			log.Println("time_out_error")

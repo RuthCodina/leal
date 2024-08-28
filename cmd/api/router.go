@@ -4,11 +4,15 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
+	campaigns "github.com/leal/pkg/campaigns/service"
 )
 
 func routes() *chi.Mux {
+	compaignsrv := campaigns.Service{}
+
 	r := chi.NewMux()
 	r.Get("/", basicHandler)
+	//	r.Post("/campaign",  )
 	return r
 }
 

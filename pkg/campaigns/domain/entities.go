@@ -3,19 +3,23 @@ package domain
 import "time"
 
 type Campaign struct {
-	id           int
-	name         string
-	activeDate   time.Time
-	inactiveDate time.Time
-	state        bool
-	branchOffice int
-	description  string
+	Id           int
+	Name         string
+	ActiveDate   time.Time
+	InactiveDate time.Time
+	State        bool
+	BranchOffice int
+	Description  string
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
 }
 
 type Branch struct {
-	id            int
-	name          string
-	commerceId    int
-	campaignId    int
-	campaignState bool
+	Id            int
+	Name          string
+	CommerceId    int
+	CampaignId    int
+	CampaignState bool
+	CreatedAt     time.Time
+	UpdatedAt     time.Time
 }
