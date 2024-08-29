@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/leal/pkg/campaigns/handlers/dtos"
+	"github.com/leal/pkg/helpers"
 )
 
 func (h *Handler) GetAllByCommerce(w http.ResponseWriter, r *http.Request) {
@@ -14,19 +15,19 @@ func (h *Handler) GetAllByCommerce(w http.ResponseWriter, r *http.Request) {
 	commerceDto := dtos.GetAllByCommerceDTO{}
 	err := json.NewDecoder(r.Body).Decode(&commerceDto)
 	if err != nil {
-		ErrInvalidJSON.Send(w)
+		helpers.ErrInvalidJSON.Send(w)
 		return
 	}
 
 	campaigns, err := h.CampaignService.GetAllByCommerce(ctx, commerceDto.CommerceId, commerceDto.Activate)
 	if err != nil {
-		ErrBadRequest.Send(w)
+		helpers.ErrBadRequest.Send(w)
 		return
 	}
 
 	log.Println(campaigns)
 
-	Success(&campaigns, http.StatusOK).Send(w)
+	helpers.Success(&campaigns, http.StatusOK).Send(w)
 }
 
 func (h *Handler) GetAllByBranch(w http.ResponseWriter, r *http.Request) {
@@ -34,17 +35,17 @@ func (h *Handler) GetAllByBranch(w http.ResponseWriter, r *http.Request) {
 	branchDto := dtos.GetAllByBranchDTO{}
 	err := json.NewDecoder(r.Body).Decode(&branchDto)
 	if err != nil {
-		ErrInvalidJSON.Send(w)
+		helpers.ErrInvalidJSON.Send(w)
 		return
 	}
 
 	campaigns, err := h.CampaignService.GetAllByBranch(ctx, branchDto.BranchId, branchDto.Activate)
 	if err != nil {
-		ErrBadRequest.Send(w)
+		helpers.ErrBadRequest.Send(w)
 		return
 	}
 
 	log.Println(campaigns)
 
-	Success(&campaigns, http.StatusOK).Send(w)
+	helpers.Success(&campaigns, http.StatusOK).Send(w)
 }

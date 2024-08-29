@@ -6,7 +6,7 @@ import (
 
 	"github.com/go-chi/chi"
 	c "github.com/leal/pkg/campaigns/handlers"
-	usr "github.com/leal/pkg/user/handlers"
+	usr "github.com/leal/pkg/users/handlers"
 )
 
 type Handlers struct {

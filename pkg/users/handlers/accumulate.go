@@ -1,5 +1,29 @@
 package handlers
 
-import "net/http"
+import (
+	"context"
+	"encoding/json"
+	"net/http"
 
-func (h *Handler) Accumulate(w http.ResponseWriter, r *http.Request) {}
+	"github.com/leal/pkg/helpers"
+	"github.com/leal/pkg/users/handlers/dtos"
+)
+
+func (h *Handler) AccumulatePoints(w http.ResponseWriter, r *http.Request) {
+	ctx := context.Background()
+	accDto := dtos.AccumulatePointsDTO{}
+	err := json.NewDecoder(r.Body).Decode(&accDto)
+	if err != nil {
+		helpers.ErrInvalidJSON.Send(w)
+		return
+	}
+
+	acc, err := h.UserService.AccumulatePoints(ctx, accDto.Id, accDto.Sucursal, accDto.Total)
+
+	if err != nil {
+		helpers.ErrBadRequest.Send(w)
+		return
+	}
+
+	helpers.Success(&acc, http.StatusOK).Send(w)
+}

@@ -21,8 +21,8 @@ func Start(port string) {
 	userHandler := uh.NewUserHandler(usersrv)
 
 	h := Handlers{
-		campaign: &campaignHandler,
-		user:     &userHandler,
+		campaign: campaignHandler,
+		user:     userHandler,
 	}
 	r := routes(&h)
 	server := newServer(port, r)
