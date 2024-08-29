@@ -1,10 +1,23 @@
 package repository
 
-import "context"
+import (
+	"context"
+	"log"
+)
 
-func (r *CampaignRepository) Activate(ctx context.Context, name string, id int) error {
+func (r *Repository) Activate(ctx context.Context, name string, id int) error {
+	_, err := r.db.Exec(activateCampaignQuery, name, id)
+	if err != nil {
+		log.Printf("cannot activate the campaign: %s", err.Error())
+		return err
+	}
 	return nil
 }
-func (r *CampaignRepository) Inactivate(ctx context.Context, name string, id int) error {
+func (r *Repository) Inactivate(ctx context.Context, name string, id int) error {
+	_, err := r.db.Exec(inactivateCampaignQuery, name, id)
+	if err != nil {
+		log.Printf("cannot inactivate the campaign: %s", err.Error())
+		return err
+	}
 	return nil
 }

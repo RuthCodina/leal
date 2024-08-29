@@ -5,11 +5,13 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/leal/pkg/campaigns/handlers"
+	c "github.com/leal/pkg/campaigns/handlers"
+	usr "github.com/leal/pkg/user/handlers"
 )
 
 type Handlers struct {
-	campaign handlers.Handler
+	campaign *c.Handler
+	user     *usr.Handler
 }
 
 func routes(h *Handlers) *chi.Mux {
@@ -17,6 +19,15 @@ func routes(h *Handlers) *chi.Mux {
 	r := chi.NewMux()
 	r.Get("/", basicHandler)
 	r.Post("/", h.campaign.Create)
+
+	r.Get("/get/branch", h.campaign.GetAllByBranch)
+	r.Get("/get/commerce", h.campaign.GetAllByCommerce)
+
+	r.Patch("/activate/on", h.campaign.Activate)
+	r.Patch("/activate/off", h.campaign.Inactivate)
+
+	r.Patch("/user/accumulate", h.user.AccumulatePoints)
+
 	return r
 }
 

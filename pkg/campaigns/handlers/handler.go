@@ -7,3 +7,9 @@ import (
 type Handler struct {
 	CampaignService domain.CampaignService
 }
+
+func NewCampaignHandler(s domain.CampaignService) *Handler {
+	return &Handler{
+		CampaignService: s,
+	}
+}

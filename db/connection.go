@@ -23,14 +23,13 @@ func ConnectToDB() *sql.DB {
 		panic(err.Error())
 	}
 
-	defer db.Close()
-
 	err = db.Ping()
 	if err != nil {
 		fmt.Println("error verifying connection with db.Ping")
 		panic(err.Error())
 	}
 	fmt.Println("Successful Connection to Database!")
+	//defer db.Close()
 
 	return db
 }

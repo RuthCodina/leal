@@ -1,6 +1,11 @@
 package domain
 
-import "time"
+import (
+	"fmt"
+	"time"
+
+	"github.com/go-sql-driver/mysql"
+)
 
 type Campaign struct {
 	Id           int
@@ -22,4 +27,28 @@ type Branch struct {
 	CampaignState bool
 	CreatedAt     time.Time
 	UpdatedAt     time.Time
+}
+
+type CampaignSQL struct {
+	Id           int
+	Name         string
+	ActiveDate   NullTime
+	InactiveDate NullTime
+	State        bool
+	BranchOffice int
+	Description  string
+	CreatedAt    NullTime
+	UpdatedAt    NullTime
+}
+
+type NullTime struct {
+	mysql.NullTime
+}
+
+func (nt *NullTime) MarshallJSON() ([]byte, error) {
+	if !nt.Valid {
+		return []byte("null"), nil
+	}
+	val := fmt.Sprintf("\"%s\"", nt.Time.Format(time.RFC3339))
+	return []byte(val), nil
 }

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"context"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -9,16 +10,15 @@ import (
 )
 
 func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
-	log.Println("iniciando create")
-	ctx := r.Context()
+	ctx := context.Background()
 	campaignDto := dtos.CampaignCreateDTO{}
 	err := json.NewDecoder(r.Body).Decode(&campaignDto)
 	if err != nil {
 		ErrInvalidJSON.Send(w)
 		return
 	}
+
 	campaign, err := h.CampaignService.Create(ctx, campaignDto.Name, campaignDto.Description, campaignDto.BranchOffice)
-	log.Println("after service create")
 
 	if err != nil {
 		ErrBadRequest.Send(w)

@@ -8,14 +8,14 @@ import (
 	"github.com/leal/pkg/campaigns/domain"
 )
 
-func (s *Service) GetAllByBranch(ctx context.Context, name string, branchId int, active bool) (campaigns *[]domain.Campaign, err error) {
-	campaigns, err = s.Repository.GetAllByBranch(ctx, name, branchId, active)
+func (s *Service) GetAllByBranch(ctx context.Context, branchId int, active bool) (campaigns *[]domain.Campaign, err error) {
+	campaigns, err = s.Repository.GetAllByBranch(ctx, branchId, active)
 	if err != nil {
 		if errors.Is(err, domain.ErrNotFound) {
 			log.Println("not_found_error")
 			srvErr := domain.Error{
 				Code: domain.ErrCodeNotFound,
-				Msg:  "error getting campaigns: not found error",
+				Msg:  "error getting campaigns by branch: not found error",
 			}
 			return campaigns, srvErr
 		}
@@ -25,14 +25,14 @@ func (s *Service) GetAllByBranch(ctx context.Context, name string, branchId int,
 
 	return campaigns, nil
 }
-func (s *Service) GetAllByCommerce(ctx context.Context, name string, commerceId int, active bool) (campaigns *[]domain.Campaign, err error) {
-	campaigns, err = s.Repository.GetAllByCommerce(ctx, name, commerceId, active)
+func (s *Service) GetAllByCommerce(ctx context.Context, commerceId int, active bool) (campaigns *[]domain.Campaign, err error) {
+	campaigns, err = s.Repository.GetAllByCommerce(ctx, commerceId, active)
 	if err != nil {
 		if errors.Is(err, domain.ErrNotFound) {
 			log.Println("not_found_error")
 			srvErr := domain.Error{
 				Code: domain.ErrCodeNotFound,
-				Msg:  "error getting campaigns: not found error",
+				Msg:  "error getting campaigns by commerce: not found error",
 			}
 			return campaigns, srvErr
 		}
