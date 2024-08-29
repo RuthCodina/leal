@@ -14,8 +14,6 @@ func ConnectToDB() *sql.DB {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-
-	fmt.Println(os.Getenv("MYSQL_PASSWORD"))
 	pwd := os.Getenv("MYSQL_PASSWORD")
 	usr := os.Getenv("USER")
 	db, err := sql.Open("mysql", usr+":"+pwd+"@tcp(localhost:3307)/lealtest")

@@ -8,9 +8,9 @@ import (
 	"github.com/leal/pkg/campaigns/domain"
 )
 
-func (r *campaignRepository) Create(ctx context.Context, name, description string, branchOffice int) (*domain.Campaign, error) {
+func (r *CampaignRepository) Create(ctx context.Context, name, description string, branchOffice int) (*domain.Campaign, error) {
 	log.Println("creating a new Campaign")
-	res, err := r.db.Exec(`insert into lealtest.campañas (nombre, fecha_activacion, fecha_inactivacion, estado, sucursal, descripcion, createdAt, UpdatedAt) 
+	res, err := r.Db.Exec(`insert into lealtest.campañas (nombre, fecha_activacion, fecha_inactivacion, estado, sucursal, descripcion, createdAt, UpdatedAt) 
 		values (?,?,?,?,?,?)`,
 		name, time.Time{}, time.Time{}, false, branchOffice, description, time.Now(), time.Time{},
 	)

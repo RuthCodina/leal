@@ -1,6 +1,8 @@
 package domain
 
-import "context"
+import (
+	"context"
+)
 
 type CampaignRepository interface {
 	Create(ctx context.Context, name string, description string, branchOffice int) (*Campaign, error)

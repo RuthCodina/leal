@@ -6,8 +6,8 @@ import (
 	"github.com/leal/pkg/campaigns/domain"
 )
 
-var _ domain.CampaignRepository = &campaignRepository{}
+var _ domain.CampaignRepository = &CampaignRepository{}
 
-type campaignRepository struct {
-	db *sql.DB
+type CampaignRepository struct {
+	Db *sql.DB
 }

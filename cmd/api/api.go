@@ -1,7 +1,8 @@
 package api
 
 func Start(port string) {
-	r := routes()
+	h := Handlers{}
+	r := routes(&h)
 	server := newServer(port, r)
 	server.Start()
 }
