@@ -41,6 +41,19 @@ type CampaignSQL struct {
 	UpdatedAt    NullTime
 }
 
+type CampaignStatusDB struct {
+	Id           int
+	Name         string
+	ActiveDate   NullTime
+	InactiveDate NullTime
+}
+type CampaignStatus struct {
+	Id           int
+	Name         string
+	ActiveDate   time.Time
+	InactiveDate time.Time
+}
+
 type NullTime struct {
 	mysql.NullTime
 }

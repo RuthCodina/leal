@@ -18,7 +18,7 @@ func (h *Handler) AccumulatePoints(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	acc, err := h.UserService.AccumulatePoints(ctx, accDto.Id, accDto.Sucursal, accDto.Total)
+	acc, err := h.UserService.AccumulatePoints(ctx, accDto.Name, accDto.Id, accDto.Sucursal, accDto.Payment)
 
 	if err != nil {
 		helpers.ErrBadRequest.Send(w)

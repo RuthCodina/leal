@@ -43,3 +43,17 @@ func (s *Service) GetAllByCommerce(ctx context.Context, commerceId int, active b
 
 	return campaigns, nil
 }
+
+func (s *Service) Status(ctx context.Context, branchId int) (*domain.CampaignStatus, error) {
+	return s.Repository.Status(ctx, branchId)
+}
+
+func CampaignName(ctx context.Context, name string) interface{} {
+	var campaign interface{}
+	for i, v := range Names {
+		if i == name {
+			campaign = v.(func(ctx context.Context, args ...interface{}) interface{})
+		}
+	}
+	return campaign
+}

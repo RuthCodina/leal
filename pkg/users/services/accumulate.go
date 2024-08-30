@@ -6,11 +6,12 @@ import (
 	"log"
 
 	"github.com/leal/pkg/helpers"
+	"github.com/leal/pkg/users/domain"
 	"github.com/shopspring/decimal"
 )
 
-func (s *Service) AccumulatePoints(ctx context.Context, userId int, branchId int, paid decimal.Decimal) (decimal.Decimal, error) {
-	acc, err := s.Repository.AccumulatePoints(ctx, userId, branchId, paid)
+func (s *Service) AccumulatePoints(ctx context.Context, name string, userId int, branchId int, payment domain.UserPayment) (*decimal.Decimal, error) {
+	acc, err := s.Repository.AccumulatePoints(ctx, name, userId, branchId, payment)
 	if err != nil {
 		if errors.Is(err, helpers.ErrTimeout) {
 			log.Println("time_out_error")
@@ -18,10 +19,10 @@ func (s *Service) AccumulatePoints(ctx context.Context, userId int, branchId int
 				Code: helpers.ErrCodeTimeout,
 				Msg:  "error calculating cashback: time out error",
 			}
-			return decimal.NewFromInt(0), srvErr
+			return nil, srvErr
 		}
 		log.Println(err.Error())
-		return decimal.NewFromInt(0), err
+		return nil, err
 	}
 
 	return acc, nil

@@ -7,9 +7,9 @@ import (
 )
 
 type UserRepository interface {
-	AccumulatePoints(ctx context.Context, userId int, branchId int, paid decimal.Decimal) (decimal.Decimal, error)
+	AccumulatePoints(ctx context.Context, name string, userId int, branchId int, payment UserPayment) (*decimal.Decimal, error)
 }
 
 type UserService interface {
-	AccumulatePoints(ctx context.Context, userId int, branchId int, paid decimal.Decimal) (decimal.Decimal, error)
+	AccumulatePoints(ctx context.Context, name string, userId int, branchId int, payment UserPayment) (*decimal.Decimal, error)
 }
