@@ -9,6 +9,7 @@ var (
 	ErrBadRequest     = handlerError{StatusCode: http.StatusBadRequest, Type: "api_error", Message: "Cannot process current request"}
 	ErrInvalidJSON    = handlerError{StatusCode: http.StatusBadRequest, Type: "invalid_json", Message: "Invalid or malformed JSON"}
 	ErrReadingRequest = handlerError{StatusCode: http.StatusInternalServerError, Type: "read_request", Message: "error trying to read the request"}
+	ErrParsingDate    = handlerError{StatusCode: http.StatusInternalServerError, Type: "parser_date", Message: "error trying to parse payment date"}
 )
 
 type handlerError struct {

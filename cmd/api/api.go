@@ -17,7 +17,7 @@ func Start(port string) {
 	campaignHandler := ch.NewCampaignHandler(campaignsrv)
 
 	userRepo := ur.NewUserRepository(db)
-	usersrv := us.NewUserService(userRepo)
+	usersrv := us.NewUserService(userRepo, campaignsrv)
 	userHandler := uh.NewUserHandler(usersrv)
 
 	h := Handlers{

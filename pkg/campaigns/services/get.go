@@ -44,16 +44,17 @@ func (s *Service) GetAllByCommerce(ctx context.Context, commerceId int, active b
 	return campaigns, nil
 }
 
-func (s *Service) Status(ctx context.Context, branchId int) (*domain.CampaignStatus, error) {
+func (s Service) Status(ctx context.Context, branchId int) (*domain.CampaignStatus, error) {
 	return s.Repository.Status(ctx, branchId)
 }
 
-func CampaignName(ctx context.Context, name string) interface{} {
+func (s Service) CampaignRate(ctx context.Context, name string) float32 {
 	var campaign interface{}
-	for i, v := range Names {
-		if i == name {
-			campaign = v.(func(ctx context.Context, args ...interface{}) interface{})
+	for k, v := range Names {
+		if k == name {
+			campaign = v.(func(ctx context.Context, args ...interface{}) float32)
 		}
 	}
-	return campaign
+
+	return campaign.(float32)
 }

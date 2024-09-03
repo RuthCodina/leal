@@ -7,3 +7,7 @@
 ## Explicación campaigns
 1. Cada campaña tiene un función que arroja float64, según el tipo de campaña que se realice, estas campañas estas organizadas por nombres y propiedades de cada una, según específique el comercio.
 2. Estas campañas son usadas en el slicing users, y son invocada según el nombre en la accumulación de cashback / coins
+
+
+A continuación el Diagrama ER de la base de Datos.
+![diagram ER](image.png)

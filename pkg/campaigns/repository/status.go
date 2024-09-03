@@ -21,7 +21,7 @@ func (r *Repository) Status(ctx context.Context, branchId int) (*domain.Campaign
 		Id:           campaignStatusDB.Id,
 		Name:         campaignStatusDB.Name,
 		ActiveDate:   campaignStatusDB.ActiveDate.Time,
-		InactiveDate: campaignStatusDB.ActiveDate.Time,
+		InactiveDate: campaignStatusDB.InactiveDate.Time,
 	}
 	return campaignStatus, nil
 }

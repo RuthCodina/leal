@@ -21,8 +21,19 @@ type User struct {
 }
 
 type UserPayment struct {
-	Amount  decimal.Decimal
-	PayDate time.Time
+	Amount   decimal.Decimal
+	PayDate  time.Time
+	BranchId int
+}
+
+type UserAccumulated struct {
+	Cashback decimal.Decimal
+	Points   decimal.Decimal
+}
+
+type CampaignBranch struct {
+	BranchId     int
+	CampaignName string
 }
 
 type UserDB struct {
